@@ -6,12 +6,12 @@ input_lines = data.readlines()
 scores = {"A": 1, "B": 2, "C":3, "X": 1, "Y": 2, "Z":3}
 point_output       = {"Lose":0, "Draw":3, "Win":6}
 
-##AX-beraber        AY-Yener          CY-Cyener     
-#BY-beraber         BZ-Zyener         AZ-Ayener
-#CZ-beraber         CX-Xyener         BX-Byener 
+#AX-draw         AY-Y-lose          CY-C-win     
+#BY-draw         BZ-Z-lose          AZ-A-win
+#CZ-draw         CX-X-lose          BX-B-win 
 
 
-def round(other_shape, me_shape):
+def round1(other_shape, me_shape):
 
     if (scores[other_shape] == scores[me_shape]):
         sum_value = point_output["Draw"] + scores[me_shape]
@@ -31,9 +31,37 @@ for line in input_lines:
     line = line.strip()
     splitted = line.split(" ")
 
+    liste.append(round1(splitted[0],splitted[1]))
+print(sum(liste)) #part1
 
-    liste.append(round(splitted[0],splitted[1]))
-print(sum(liste))
+
+#part2  
+scores2 = {"A": 1, "B": 2, "C":3, "X": 0, "Y": 3, "Z":6}
+
+list2 = []
+
+def round2(input1, output1):
+    match output1:
+        case 6:
+            y = input1 % 3 + 1
+        case 3:
+            y = input1
+        case 0:
+            y = (input1 + 1) % 3 + 1
+
+    total = y + output1
+
+    return total
+
+for line in input_lines:
+    line = line.strip()
+    shape_other, shape_me = line.split(" ")
+    (input1, output1) = (scores2[shape_other], scores2[shape_me])
+    kj = round2(input1, output1)
+    list2.append(kj)
+
+print(sum(list2))
 
 
-print(round("C","Z"))
+
+

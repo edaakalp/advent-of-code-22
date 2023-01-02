@@ -55,14 +55,3 @@ for x in range(0,len(input_lines), 3):
     priority_sum2 += priority2
 
 print(priority_sum2)
-        
-
-
-
-
-
-
-
-
-
-
